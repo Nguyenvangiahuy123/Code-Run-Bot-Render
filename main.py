@@ -23,7 +23,7 @@ yeumoney.add(btn3)
 user_data = 'user_data.json'
 # Kết hợp các nút từ dilink và yeumoney vào một InlineKeyboardMarkup
 gopbutton = types.InlineKeyboardMarkup()
-gopbutton.add(btn1, btn2, btn3)
+gopbutton.add(btn2, btn3)
 
 sotien_muonrut = 100000
 
@@ -148,7 +148,7 @@ def callback_query(call):
     # Thực hiện yêu cầu GET tới API và kiểm tra phản hồi
     response = requests.get(f'https://yeumoney.com/QL_api.php?token=eee97ade0e7401a23d12ce61158be94906f9f098c9b7f9c2599e50bb6a7ef5c3&format=json&url=http://www.lequangminh591.id.vn/web_key.html?key!{key_ghe}')
     
-    if response.status_code == 70:
+    if response.status_code == 50:
         try:
             response_json = response.json()
             url_key = response_json.get('shortenedUrl', 'Không thể lấy link')
@@ -165,7 +165,7 @@ def callback_query(call):
 <pre>• Link Rút Gọn Của Bạn Là : <code>{url_key}</code>
 • Vượt Link Xong Sử Dụng Lệnh
 • /yeumoney + [ Mã Code ]
-• Nhập Đúng Sẽ Được Cộng 70Đ</pre>
+• Nhập Đúng Sẽ Được Cộng 50Đ</pre>
 '''
 
     # Gửi phản hồi văn bản và GIF
@@ -178,10 +178,10 @@ def handle_yeumoney_command(message):
     if key in used_keys:
         bot.reply_to(message, 'Mã code này đã được sử dụng. Vui lòng thử lại với mã khác.')
     elif key == key_ghe: # Thay YOUR_CORRECT_KEY_HERE bằng key chính xác
-        update_user_balance(message.from_user.id, 70)  # Cộng 200Đ vào tài khoản người dùng
+        update_user_balance(message.from_user.id, 50)  # Cộng 200Đ vào tài khoản người dùng
         used_keys[key] = True  # Đánh dấu mã đã được sử dụng
         save_used_keys(used_keys)
-        bot.reply_to(message, 'Bạn đã nhập đúng mã code! Đã được cộng 70Đ vào tài khoản.')
+        bot.reply_to(message, 'Bạn đã nhập đúng mã code! Đã được cộng 50Đ vào tài khoản.')
     else:
         bot.reply_to(message, 'Mã code không hợp lệ. Vui lòng thử lại.')
 
@@ -278,7 +278,7 @@ def callback_query(call):
 <pre>• Link Rút Gọn Của Bạn Là : {url_key}
 • Vượt Link Xong Sử Dụng Lệnh
 • /link4m + [ Mã Code ]
-• Nhập Đúng Sẽ Được Cộng 70Đ</pre>
+• Nhập Đúng Sẽ Được Cộng 50Đ</pre>
 '''
 
     # Gửi phản hồi văn bản và GIF
@@ -294,10 +294,10 @@ def handle_yeumoney_command(message):
     if key in used_keys:
         bot.reply_to(message, 'Mã code này đã được sử dụng. Vui lòng thử lại với mã khác.')
     elif key == key_g:  # Thay YOUR_CORRECT_KEY_HERE bằng key chính xác
-        update_user_balance(message.from_user.id, 70)  # Cộng 200Đ vào tài khoản người dùng
+        update_user_balance(message.from_user.id, 50)  # Cộng 200Đ vào tài khoản người dùng
         used_keys[key] = True  # Đánh dấu mã đã được sử dụng
         save_used_keys(used_keys)
-        bot.reply_to(message, 'Bạn đã nhập đúng mã code! Đã được cộng 300Đ vào tài khoản.')
+        bot.reply_to(message, 'Bạn đã nhập đúng mã code! Đã được cộng 50Đ vào tài khoản.')
     else:
         bot.reply_to(message, 'Mã code không hợp lệ. Vui lòng thử lại.')
 
@@ -305,8 +305,8 @@ def handle_yeumoney_command(message):
 def checktien_link(message):
     link_text = '''
     Mỗi Lần Rút Gọn Của Các Link'
-    • Link4m | 70 Đồng
-    • Yeumoney | 70 Đồng
+    • Link4m | 300 Đồng
+    • Yeumoney | 200 Đồng
     '''
     bot.reply_to(message, link_text)
      
@@ -403,7 +403,7 @@ def handle_withdraw_request(message):
             bank_name = details[2]
             real_name = details[3]
             amount = int(details[4])
-            if amount >= 1000:
+            if amount >= 100000:
                 if current_balance >= amount:
                     # Trừ số tiền rút từ số dư của người dùng
                     user_data[str(user_id)]['balance'] -= amount
@@ -420,7 +420,7 @@ def handle_withdraw_request(message):
                     text = f'''
 <pre>🛡Yêu cầu rút tiền của bạn đã được gửi đi. Vui lòng chờ duyệt.
 Ví dụ:
-<code>/rut 0123456789 MBBANK NGUYEN VAN A 1000</code>
+<code>/rut 0123456789 MBBANK NGUYEN VAN A 100000</code>
 Số tiền rút tối thiểu: 100000Đ
 ⛔️Chỉ gửi lệnh rút 1 lần [không spam rút]</pre>
 '''
@@ -458,8 +458,9 @@ def handle_admin_info(message):
 <pre>
 Infomation
 Telegram : @laptrinhcode
-Zalo : @None
-Facebook : @None
+Zalo : 0896874211
+Group Telegram: @sourcecodebothuymod1
+Group Chat : @sourcecodebothuymod
 </pre>
     '''
 

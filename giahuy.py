@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from telebot.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 import time
 import random
+from keep_alive import keep_alive
 
 api_kiemtien = "8019157808:AAEkKK4FXSIcZoVElmMswho8fkUpUO8f8jc"
 bot = telebot.TeleBot(api_kiemtien)
@@ -469,8 +470,7 @@ Facebook : @None
 
     # Gửi tin nhắn kèm GIF
     bot.send_animation(message.chat.id, gif_url, caption=text, parse_mode='HTML')
-
-        
+keep_alive()
 bot.polling()
 
 

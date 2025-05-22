@@ -23,7 +23,7 @@ yeumoney.add(btn3)
 user_data = 'user_data.json'
 # Kết hợp các nút từ dilink và yeumoney vào một InlineKeyboardMarkup
 gopbutton = types.InlineKeyboardMarkup()
-gopbutton.add(btn1, btn2, btn3)
+gopbutton.add(btn2, btn3)
 
 sotien_muonrut = 100000
 
